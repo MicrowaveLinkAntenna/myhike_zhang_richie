@@ -1,3 +1,91 @@
+/* New Colour Palette:
+* Khaki (bg-info): #B7B3A1
+* Sage (bg-success): #D1CA98
+* Buff (bg-light): #EDBF85
+* Maize (bg-secondary): #F7F06D
+* Orange (bg-primary): #FFB140
+*/
+
+/* .bg-primary {
+    background-color: #FFB140 !important;
+}
+
+.bg-secondary {
+    background-color: #F7F06D !important;
+}
+
+.bg-light {
+    background-color: #EDBF85 !important;
+}
+
+.bg-success {
+    background-color: #D1CA98 !important;
+}
+
+.bg-info {
+    background-color: #B7B3A1 !important;
+} */
+
+/* New Colour Palette:
+* Oxford Blue (text): #001B3E
+* Charcoal (navbar backgrund): #294C60
+* French gray (background): #ADB6C4
+* Papaya Whip (accent 1): #FFEFD3
+* Peach (accent 2): #FFC49B
+*/
+
+.bg-primary {
+  background-color: #294C60 !important;
+  color: #FFFFFF !important;
+}
+
+body {
+  background-color: #ADB6C4 !important;
+}
+
+body,
+h1,
+p {
+  color: #001B3E;
+}
+
+nav a,
+footer span,
+.text-white,
+.text-white * {
+  color: #FFFFFF !important;
+}
+
+nav button,
+.navbar-toggler-icon {
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+footer span {
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+@font-face {
+  font-family: Roboto-Mono;
+  src: url(./RobotoMono-Regular.ttf);
+}
+
+body {
+  font-family: 'Roboto-Mono', monospace;
+}
+
+.container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.form-field {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 /*-------------------------------------
  * customize material design icon sizes 
  *-------------------------------------
