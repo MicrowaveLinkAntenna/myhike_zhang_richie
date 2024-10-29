@@ -64,5 +64,81 @@ function readQuote(day) {
             console.log("Error calling onSnapshot", error);
         });
 }
-readQuote("tuesday");   //calling the function
+readQuote("monday");   //calling the function
 
+//-----------------------------------------------
+// Create a "max" number of hike document objects
+//-----------------------------------------------
+function writeListings(max) {
+    //define a variable for the collection you want to create in Firestore to populate data
+    var listingsRef = db.collection("listings");
+    listingsRef.add({
+        //id: "1", // This was causing the doc ID to now show up
+        name: "Microwave Link Antennas",
+        details: "Directional parabolic antennas in the microwave spectrum, for long distance point-to-point links at high data rates.",
+        image: "images/Zaldiaran_-_Antenas_01.square.jpg",
+        items: 39817,          //number value
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+    listingsRef.add({
+        //id: "2",
+        name: "Cellular Antennas",
+        details: "4G and 5G sector antennas for providing cellular coverage.",
+        image: "images/Sector_antennas_on_roof.square.jpg",
+        items: 19372,          //number value
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+    listingsRef.add({
+        //id: "3",
+        name: "VHF/UHF Antennas",
+        details: "Dual-band VHF and UHF antennas for two-way radio, television, and air traffic communications.",
+        image: "images/Sector_antennas_on_roof.square.jpg",
+        items: 13812,          //number value
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+}
+
+//------------------------------------------------------------------------------
+// Input parameter is a string representing the collection we are reading from
+//------------------------------------------------------------------------------
+function displayCardsDynamically(collection) {
+    let cardTemplate = document.getElementById("listingCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
+
+    db.collection(collection).get()   //the collection called "hikes"
+        .then(allListings => {
+            //var i = 1;  //Optional: if you want to have a unique ID for each hike
+            allListings.forEach(doc => { //iterate thru each doc
+                console.log(doc)
+                console.log(doc.data())
+
+                var docID = doc.id;
+                var title = doc.data().name;       // get value of the "name" key
+                var details = doc.data().details;  // get value of the "details" key
+                var image = doc.data().image;
+                var items = doc.data().items;
+                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+
+                //update title and text and image
+                newcard.querySelector('.card-title').innerHTML = title;
+                newcard.querySelector('.card-text').innerHTML = details;
+                newcard.querySelector('.card-img-top').src = image;
+                newcard.querySelector('.items').innerText = items;
+
+                //Optional: give unique ids to all elements for future use
+                newcard.querySelector('.card').setAttribute("id", "card-" + docID);
+                // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
+                // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
+
+                newcard.querySelector('a').setAttribute("href", "/eachListing.html?docID=" + docID);
+
+                console.log(newcard)
+
+                //attach to gallery, Example: "hikes-go-here"
+                document.getElementById(collection + "-go-here").appendChild(newcard);
+
+                //i++;   //Optional: iterate variable to serve as unique ID
+            })
+        })
+}
+
+displayCardsDynamically("listings");  //input param is the name of the collection

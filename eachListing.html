@@ -37,6 +37,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
 
+    <style>
+        img {
+            max-width: 500px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -47,36 +53,11 @@
     <!-- our own navbar goes here -->
     <nav id="navbarPlaceholder"></nav>
 
-    <!-- the body of your page goes here -->
-    <div class="container-fluid bg-primary p-5">
-        <div class="container bg-primary text-white">
-            <h1 class="display-4">Good morning, <span id="name-goes-here"></span></h1>
-            <!-- <hr> -->
-            <br />
-            <p>Quote of the day: <span id="quote-goes-here"></span></p>
-        </div>
-    </div>
-
     <!-- Card group -->
     <main class="container">
-        <h1>Product Categories</h1>
-        <div class="row row-cols-1 row-cols-md-3 g-4" id="listings-go-here">
-            <template id="listingCardTemplate">
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="imagePlaceholder" class="card-img-top" alt="AltPlaceholder">
-                        <div class="card-body">
-                            <h5 class="card-title">TitlePlaceholder</h5>
-                            <p class="card-text">TextPlaceholder</p>
-                            <a class="btn btn-primary" href="HrefPlaceholder">Start Shopping</a>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted"><span class="items">ItemPlaceholder</span> Items</small>
-                        </div>
-                    </div>
-                </div>
-            </template>
-        </div>
+        <h1 id="listingName"></h1>
+        <img src="" class="listing-img" />
+        <p id="listingDetails"></p>
     </main>
 
 
@@ -89,7 +70,7 @@
     <script src="./scripts/firebaseAPI_TEAM99.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/script.js"></script>
-    <script src="./scripts/main.js"></script>
+    <script src="./scripts/eachListing.js"></script>
 
 </body>
 
