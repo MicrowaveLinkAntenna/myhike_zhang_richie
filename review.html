@@ -47,48 +47,59 @@
     <!-- our own navbar goes here -->
     <nav id="navbarPlaceholder"></nav>
 
-    <!-- Card group -->
-    <!-- <main class="container">
-        <h1 id="listingName"></h1>
-        <img src="" class="listing-img" />
-        <p id="listingDetails"></p>
-    </main> -->
     <div class="container">
-        <h1><span id="listingName">this listing</span></h1>
-        <div class="position-relative">
-            <img class="listing-img responsive" src="" alt="Listing photo">
-            <p id="listingDetails"></p>
-            <button class="btn btn-primary position-absolute bottom-0 end-0 m-3"
-                onclick="saveListingDocumentIDAndRedirect()">Write Review</button>
-        </div>
+        <!-- Content here -->
+        <h1>Submit a Review for <span id="listingName"></span></h1>
+
+        <form class="card-body form-group">
+            <div class="form-field">
+                <div class="card-body">
+                    <p>How satisfied are you with this antenna:</p>
+                    <span class="material-icons star" id="star0">star_outline</span>
+                    <span class="material-icons star" id="star1">star_outline</span>
+                    <span class="material-icons star" id="star2">star_outline</span>
+                    <span class="material-icons star" id="star3">star_outline</span>
+                    <span class="material-icons star" id="star4">star_outline</span>
+                </div>
+            </div>
+            <div class="form-field">
+                <label for="caused-interference">Did this antenna interfere with other antennas?</label>
+                <br />
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="caused-interference" id="btnradio1" autocomplete="off"
+                        value="Yes" checked>
+                    <label class="btn btn-outline-primary" for="btnradio1">Yes</label>
+
+                    <input type="radio" class="btn-check" name="caused-interference" id="btnradio2" autocomplete="off"
+                        value="No">
+                    <label class="btn btn-outline-primary" for="btnradio2">No</label>
+
+                    <input type="radio" class="btn-check" name="caused-interference" id="btnradio3" autocomplete="off"
+                        value="Not Sure">
+                    <label class="btn btn-outline-primary" for="btnradio3">Not Sure</label>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="dropdownMenu">What application did you use this antenna for?</label>
+                <br />
+                <select class="form-control" id="application">
+                    <option>Hobby</option>
+                    <option>Cellular Service</option>
+                    <option>Enterprise Networking</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="comment" class="form-label">Do you have any other comments you have about this
+                    antenna?</label>
+                <textarea class="form-control" id="comment" rows="3"></textarea>
+            </div>
+            <div class="form-field card-body d-grid gap-2">
+                <button id="submit" class="btn btn-primary" type="button" onclick="writeReview()">Submit</button>
+            </div>
+        </form>
     </div>
 
-    <div class="container">
-        <h2>Reviews:</h2>
-        <div id="details-go-here"></div>
-        <!-- Here is the container for cards with horizontal scrolling -->
-        <div class="review-card-container">
-            <div id="reviewCardGroup" class="row row-cols-auto">
-                <!-- Add your card templates here -->
-            </div>
-        </div>
-    </div>
-
-    <template id="reviewCardTemplate">
-        <div class="card review-card bg-secondary">
-            <img class="card-img-top">
-            <div class="card-body bg-light">
-                <p class="star-rating"></p>
-                <p><b>Customer reported that this product caused interference:</b> <span
-                        class="caused-interference">placeholder</span></p>
-                <p><b>Customer used this antenna for:</b> <span class="application">placeholder</span></p>
-                <h5>Customer comments:</h5>
-                <p class="comment">placeholder</p>
-                <p><b>Review posted on:</b> <span class="time">placeholder</span></p>
-                </p>
-            </div>
-        </div>
-    </template>
 
 
     <!-- our own footer goes here-->
@@ -100,7 +111,7 @@
     <script src="./scripts/firebaseAPI_TEAM99.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/script.js"></script>
-    <script src="./scripts/eachListing.js"></script>
+    <script src="./scripts/review.js"></script>
 
 </body>
 

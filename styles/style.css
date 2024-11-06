@@ -118,3 +118,26 @@ body {
   margin: 0 auto;
   /* Centers the circle horizontally */
 }
+
+.star {
+  width: 20px;
+}
+
+.listing-img {
+  max-width: 500px;
+}
+
+/* Add CSS styles for the card container with vertical scrolling */
+.review-card-container {
+  max-height: 350px;
+  /* Adjust the maximum height as needed */
+  overflow-y: auto;
+}
+
+/* Style the individual cards as needed */
+.review-card {
+  width: 45%;
+  /* Adjust the width as per your design, leaving a little space for margins */
+  margin: 2%;
+  /* Add margin between cards */
+}

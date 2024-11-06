@@ -47,48 +47,30 @@
     <!-- our own navbar goes here -->
     <nav id="navbarPlaceholder"></nav>
 
-    <!-- Card group -->
-    <!-- <main class="container">
-        <h1 id="listingName"></h1>
-        <img src="" class="listing-img" />
-        <p id="listingDetails"></p>
-    </main> -->
     <div class="container">
-        <h1><span id="listingName">this listing</span></h1>
-        <div class="position-relative">
-            <img class="listing-img responsive" src="" alt="Listing photo">
-            <p id="listingDetails"></p>
-            <button class="btn btn-primary position-absolute bottom-0 end-0 m-3"
-                onclick="saveListingDocumentIDAndRedirect()">Write Review</button>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>Reviews:</h2>
-        <div id="details-go-here"></div>
-        <!-- Here is the container for cards with horizontal scrolling -->
-        <div class="review-card-container">
-            <div id="reviewCardGroup" class="row row-cols-auto">
-                <!-- Add your card templates here -->
+        <h1>User Profile </h1>
+        <form>
+            <fieldset class="mb-3" id="personalInfoFields" disabled>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label>School</label>
+                    <input type="text" id="schoolInput" class="form-control" placeholder="Enter your school">
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
+                </div>
+            </fieldset>
+            <div class="d-flex justify-content-end mt-5">
+                <button type="button" class="btn btn-secondary" onclick="editUserInfo()">Edit</button>
+                <span style="width: 10px"></span>
+                <button type="button" class="btn btn-info" onclick="saveUserInfo()">Save</button>
             </div>
-        </div>
+        </form>
     </div>
-
-    <template id="reviewCardTemplate">
-        <div class="card review-card bg-secondary">
-            <img class="card-img-top">
-            <div class="card-body bg-light">
-                <p class="star-rating"></p>
-                <p><b>Customer reported that this product caused interference:</b> <span
-                        class="caused-interference">placeholder</span></p>
-                <p><b>Customer used this antenna for:</b> <span class="application">placeholder</span></p>
-                <h5>Customer comments:</h5>
-                <p class="comment">placeholder</p>
-                <p><b>Review posted on:</b> <span class="time">placeholder</span></p>
-                </p>
-            </div>
-        </div>
-    </template>
 
 
     <!-- our own footer goes here-->
@@ -100,7 +82,7 @@
     <script src="./scripts/firebaseAPI_TEAM99.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/script.js"></script>
-    <script src="./scripts/eachListing.js"></script>
+    <script src="./scripts/profile.js"></script>
 
 </body>
 
