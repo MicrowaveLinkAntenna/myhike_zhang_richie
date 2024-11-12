@@ -47,39 +47,32 @@
     <!-- our own navbar goes here -->
     <nav id="navbarPlaceholder"></nav>
 
-    <!-- the body of your page goes here -->
-    <div class="container-fluid bg-primary p-5">
-        <div class="container bg-primary text-white">
-            <h1 class="display-4">Good morning, <span id="name-goes-here"></span></h1>
-            <!-- <hr> -->
-            <br />
-            <p>Quote of the day: <span id="quote-goes-here"></span></p>
+    <div class="container">
+        <h1>Saved Listings for <span id=name-goes-here></span></h1>
+        <!-- Here is container for cards  -->
+        <div class="container">
+            <div id="listingCardGroup" class="row row-cols-1 row-cols-md-3 g-4">
+            </div>
         </div>
     </div>
 
-    <!-- Card group -->
-    <main class="container">
-        <h1>Product Categories</h1>
-        <div class="row row-cols-1 row-cols-md-3 g-4" id="listings-go-here">
-            <template id="listingCardTemplate">
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="imagePlaceholder" class="card-img-top" alt="AltPlaceholder">
-                        <div class="card-body">
-                            <h5 class="card-title">TitlePlaceholder</h5>
-                            <p class="card-text">TextPlaceholder</p>
-                            <a class="btn btn-primary" href="HrefPlaceholder">Start Shopping</a>
-                            <i class="material-icons clickable">bookmark_border</i>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted"><span class="items">ItemPlaceholder</span> Items</small>
-                        </div>
-                    </div>
+    <!-- Templates for general use, not displayed -->
+    <template id="savedCardTemplate">
+        <div class="col">
+            <div class="card h-100">
+                <img src="imagePlaceholder" class="card-img-top" alt="AltPlaceholder">
+                <div class="card-body">
+                    <h5 class="card-title">TitlePlaceholder</h5>
+                    <p class="card-text">TextPlaceholder</p>
+                    <a class="btn btn-primary" href="HrefPlaceholder">Start Shopping</a>
+                    <i class="material-icons clickable">bookmark</i>
                 </div>
-            </template>
+                <div class="card-footer">
+                    <small class="text-muted"><span class="items">ItemPlaceholder</span> Items</small>
+                </div>
+            </div>
         </div>
-    </main>
-
+    </template>
 
     <!-- our own footer goes here-->
     <nav id="footerPlaceholder"></nav>
@@ -90,7 +83,7 @@
     <script src="./scripts/firebaseAPI_TEAM99.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/script.js"></script>
-    <script src="./scripts/main.js"></script>
+    <script src="./scripts/saved.js"></script>
 
 </body>
 

@@ -44,7 +44,7 @@ function insertNameFromFirestore() {
         }
     })
 }
-insertNameFromFirestore();
+//insertNameFromFirestore();
 
 
 // Function to read the quote of the day from the Firestore "quotes" collection
@@ -64,10 +64,10 @@ function readQuote(day) {
             console.log("Error calling onSnapshot", error);
         });
 }
-readQuote("monday");   //calling the function
+//readQuote("monday");   //calling the function
 
 //-----------------------------------------------
-// Create a "max" number of hike document objects
+// Create a "max" number of listing document objects
 //-----------------------------------------------
 function writeListings(max) {
     //define a variable for the collection you want to create in Firestore to populate data
@@ -102,11 +102,11 @@ function writeListings(max) {
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 function displayCardsDynamically(collection) {
-    let cardTemplate = document.getElementById("listingCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
+    let cardTemplate = document.getElementById("listingCardTemplate"); // Retrieve the HTML element with the ID "listingCardTemplate" and store it in the cardTemplate variable. 
 
-    db.collection(collection).get()   //the collection called "hikes"
+    db.collection(collection).get()   //the collection called "listings"
         .then(allListings => {
-            //var i = 1;  //Optional: if you want to have a unique ID for each hike
+            //var i = 1;  //Optional: if you want to have a unique ID for each listing
             allListings.forEach(doc => { //iterate thru each doc
                 console.log(doc)
                 console.log(doc.data())
@@ -131,14 +131,84 @@ function displayCardsDynamically(collection) {
 
                 newcard.querySelector('a').setAttribute("href", "/eachListing.html?docID=" + docID);
 
+                newcard.querySelector('i').id = 'save-' + docID;   //guaranteed to be unique
+                newcard.querySelector('i').onclick = () => saveBookmark(docID);
+
                 console.log(newcard)
 
-                //attach to gallery, Example: "hikes-go-here"
+                //attach to gallery, Example: "listings-go-here"
                 document.getElementById(collection + "-go-here").appendChild(newcard);
+
+                currentUser.get().then(userDoc => {
+                    //get the user name
+                    var bookmarks = userDoc.data().bookmarks;
+                    if (bookmarks.includes(docID)) {
+                        document.getElementById('save-' + docID).innerText = 'bookmark';
+                    }
+                })
 
                 //i++;   //Optional: iterate variable to serve as unique ID
             })
         })
 }
 
-displayCardsDynamically("listings");  //input param is the name of the collection
+//displayCardsDynamically("listings");  //input param is the name of the collection
+
+//Function that calls everything needed for the main page  
+function doAll() {
+    // figure out what day of the week it is today
+    const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    const d = new Date();
+    let day = weekday[d.getDay()];
+
+    // the following functions are always called when someone is logged in
+    readQuote(day);
+    insertNameFromFirestore();
+    displayCardsDynamically("listings");
+}
+doAll();
+
+//-----------------------------------------------------------------------------
+// This function is called whenever the user clicks on the "bookmark" icon.
+// It adds the listing to the "bookmarks" array
+// Then it will change the bookmark icon from the hollow to the solid version. 
+//-----------------------------------------------------------------------------
+function saveBookmark(listingDocID) {
+    currentUser.get().then(userDoc => {
+        const bookmarks = userDoc.data().bookmarks
+        if (bookmarks.includes(listingDocID)) {
+            currentUser.update({
+                bookmarks: firebase.firestore.FieldValue.arrayRemove(listingDocID)
+            })
+                .then(function () {
+                    console.log("bookmark has been removed for " + listingDocID);
+                    let iconID = "save-" + listingDocID
+                    document.getElementById(iconID).innerText = 'bookmark_border';
+                })
+                .catch(function (error) {
+                    console.error("Error removing bookmark:", error)
+                    alert("Error removing bookmark, see console.")
+                })
+        } else {
+            // Manage the backend process to store the listingDocID in the database, recording which listing was bookmarked by the user.
+            currentUser.update({
+                // Use 'arrayUnion' to add the new bookmark ID to the 'bookmarks' array.
+                // This method ensures that the ID is added only if it's not already present, preventing duplicates.
+                bookmarks: firebase.firestore.FieldValue.arrayUnion(listingDocID)
+            })
+                // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
+                .then(function () {
+                    console.log("bookmark has been saved for " + listingDocID);
+                    let iconID = 'save-' + listingDocID;
+                    //console.log(iconID);
+                    //this is to change the icon of the listing that was saved to "filled"
+                    document.getElementById(iconID).innerText = 'bookmark';
+                })
+                .catch(function (error) {
+                    console.error("Error adding bookmark:", error)
+                    alert("Error adding bookmark, see console.")
+                })
+        }
+    })
+}
+
